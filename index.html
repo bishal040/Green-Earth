@@ -63,55 +63,30 @@
 <div class="flex flex-col lg:flex-row justify-between gap-20 mb-15 px-2">
   <div>
     <div class="mb-5 px-6">Categories</div>
+    <button onClick ="allPlants()"class="category-btn block w-full px-6 py-2 text-zinc-700 rounded-xl text-left mb-3 cursor-pointer" data-category="${plant.category}">All Trees</button>
     <div id="all-plants-container" class="categories flex flex-col gap-4 px-0 w-[280px]">
       <!-- All the Plant Category -->
     </div>
   </div>
   <div>
-    <div id="plant-cards" class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-10 mx-auto rounded-2xl">
-    <div class="card bg-white p-5 h-auto w-full ">
-      <img src="assets/hero-leaf1.png" alt="">
-      <p class="mt-2 mb-2 font-bold">Mango Tree</p>
-      <p class="mt-2 mb-2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus necessitatibus molestias ipsam labore quia adipisci consequatur numquam nam similique, ea eum quasi laboriosam possimus sed illum iure dolorum officiis ex.</p>
-      <div class="flex justify-between items-center ">
-        <button class="bg-green-50 p-2 rounded-2xl text-green-700 cursor-pointer">Get Involved</button>
-        <p>tk<span>500</span></p>
-      </div>
-      <button class="bg-green-700 p-2 rounded-2xl text-white cursor-pointer mt-2 mb-2">Get Involved</button>
-    </div>
-    <div class="card bg-white p-5 h-auto w-full">
-      <img src="assets/hero-leaf1.png" alt="">
-      <p class="mt-2 mb-2 font-bold">Mango Tree</p>
-      <p class="mt-2 mb-2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus necessitatibus molestias ipsam labore quia adipisci consequatur numquam nam similique, ea eum quasi laboriosam possimus sed illum iure dolorum officiis ex.</p>
-      <div class="flex justify-between items-center ">
-        <button class="bg-green-50 p-2 rounded-2xl text-green-700 cursor-pointer">Get Involved</button>
-        <p>tk<span>500</span></p>
-      </div>
-      <button class="bg-green-700 p-2 rounded-2xl text-white cursor-pointer mt-2 mb2">Get Involved</button>
-    </div>
-    <div class="card bg-white p-5 h-auto w-full">
-      <img src="assets/hero-leaf1.png" alt="">
-      <p class="mt-2 mb-2 font-bold">Mango Tree</p>
-      <p class="mt-2 mb-2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus necessitatibus molestias ipsam labore quia adipisci consequatur numquam nam similique, ea eum quasi laboriosam possimus sed illum iure dolorum officiis ex.</p>
-      <div class="flex justify-between items-center ">
-        <button class="bg-green-50 p-2 rounded-2xl text-green-700 cursor-pointer">Get Involved</button>
-        <p>tk<span>500</span></p>
-      </div>
-      <button class="bg-green-700 p-2 rounded-2xl text-white cursor-pointer mt-2 mb2">Get Involved</button>
-    </div>
+    <div id="plant-cards" class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-5 text-sm mx-auto rounded-2xl">
   </div>
   </div>
   <div class="cart  bg-white h-auto w-full">
     <p class="px-5 mt-2 mb-2 font-bold">Your Cart</p>
-    <div class=" cart-log mx-5 px-5 py-5 rounded-xl flex justify-between items-center bg-green-50">
+    <div id = "cart-log">
+
+    </div>
+    <!-- <div  class=" mx-5 px-5 py-5 rounded-xl flex justify-between items-center bg-green-50">
       <div>
         <p class="font-bold mb-2">Mango Cart</p><span>500*2</span></div>
       <div>X</div>
-    </div>
+    </div> -->
+
     <hr class="border-t-2 border-gray-100 my-2 mx-5">
-    <div class="flex justify-between px-5">
+    <div class="flex justify-between px-5 total-section">
       <p>Total:</p>
-      <p>$<span>1000</span></p>
+      <p>$<span id="total-amount">0</span></p>
     </div>
   </div>
   </div>
@@ -183,3 +158,5 @@
   <script src="script.js"></script>
 </body>
 </html>
+
+
