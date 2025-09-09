@@ -6,39 +6,55 @@ const url1 = "https://openapi.programming-hero.com/api/plants"
       fetch(url1)
       .then((res)=>res.json())
       .then((json) => {
-        const allPlantsContainer = document.getElementById("all-plants-container");
+        const allPlantsContainerDesktop = document.getElementById("all-plants-container-desktop");
+        const allPlantsContainerMobile = document.getElementById("all-plants-container-mobile");
+        
+        allPlantsContainerDesktop.innerHTML = "";
+        allPlantsContainerMobile.innerHTML = "";
+        
         const arr= json.plants;
-        allPlantsContainer.innerHTML = "";
         let count = 0;
-        if(count==0){
+        
+        // Add "All Trees" button
+        const createAllTreesButton = (container) => {
           const plantBtn = document.createElement("div");
           plantBtn.innerHTML = `
-          <button class="category-btn block w-full px-6 py-2 rounded-xl text-left cursor-pointer toggle-btn text-zinc-700 hover:scale-110 hover:bg-[#15803D] hover:text-white" segment-id="${count++}" data-category="All Trees">All Trees</button>
+          <button class="category-btn block w-full px-6 py-2 rounded-xl text-left cursor-pointer toggle-btn text-zinc-700 hover:scale-110 hover:bg-[#15803D] hover:text-white" segment-id="${count}" data-category="All Trees">All Trees</button>
           `;
-          allPlantsContainer.appendChild(plantBtn);
+          container.appendChild(plantBtn);
           const btn = plantBtn.querySelector("button");
           const segmentId = btn.getAttribute("segment-id");
           const id = parseInt(segmentId);
           btn.addEventListener("click", () => {
-          loadData(id, btn);
-        });
-        }
+            loadData(id, btn);
+          });
+        };
+        
+        createAllTreesButton(allPlantsContainerDesktop);
+        createAllTreesButton(allPlantsContainerMobile);
+        count++;
+
         for(let plant of arr){
           if (!document.querySelector(`button[data-category="${plant.category}"]`)) {
-          const plantBtn = document.createElement("div");
-          plantBtn.innerHTML = `
-          <button class="category-btn block w-full px-6 py-2 rounded-xl text-left cursor-pointer toggle-btn text-zinc-700 hover:scale-110 hover:bg-[#15803D] hover:text-white " segment-id="${count++}" data-category="${plant.category}">${plant.category}</button>
-          `;
-          allPlantsContainer.appendChild(plantBtn);
-          const btn = plantBtn.querySelector("button");
-          const segmentId = btn.getAttribute("segment-id");
-          const id = parseInt(segmentId);
-          btn.addEventListener("click", () => {
-          loadData(id, btn);
-        });
+            const createCategoryButton = (container) => {
+              const plantBtn = document.createElement("div");
+              plantBtn.innerHTML = `
+              <button class="category-btn block w-full px-6 py-2 rounded-xl text-left cursor-pointer toggle-btn text-zinc-700 hover:scale-110 hover:bg-[#15803D] hover:text-white" segment-id="${count}" data-category="${plant.category}">${plant.category}</button>
+              `;
+              container.appendChild(plantBtn);
+              const btn = plantBtn.querySelector("button");
+              const segmentId = btn.getAttribute("segment-id");
+              const id = parseInt(segmentId);
+              btn.addEventListener("click", () => {
+                loadData(id, btn);
+              });
+            };
+            createCategoryButton(allPlantsContainerDesktop);
+            createCategoryButton(allPlantsContainerMobile);
+            count++;
+          }
         }
-      }
-      loadCards(arr);
+        loadCards(arr);
         }
       )   
     .finally(() => hideLoading());
@@ -75,7 +91,7 @@ const url1 = "https://openapi.programming-hero.com/api/plants"
   allCards.innerHTML = "";
   for (let plant of plants) {
     const cardBtn = document.createElement("div");
-    cardBtn.classList.add("card", "bg-white", "p-5", "h-[500px]", "w-full");
+    cardBtn.classList.add("card", "bg-white", "p-5", "h-[500px]", "w-full", "rounded-2xl");
     cardBtn.innerHTML = `
       <img src="${plant.image}" alt="" class="h-54 xl:h-48 w-full object-cover rounded-lg">
       <p class="mt-2 mb-2 font-bold cursor-pointer">${plant.name}</p>
@@ -136,9 +152,7 @@ const showPopUp = (plant) => {
         <span class="font-semibold">Description:</span>${plant.description}
       </p>
 
-      <!-- Close Button -->
-      
-    </div>
+      </div>
   </div>
           `;
           //allCards.appendChild(cardBtn);
@@ -194,4 +208,3 @@ const showPopUp = (plant) => {
       total.innerText = current -(parseInt(cartPrice.innerText)*parseInt(cartQnt.innerText));
       cart.remove();
     }
-    

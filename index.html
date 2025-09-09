@@ -7,23 +7,12 @@
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <link rel="stylesheet" href="style.css">
   <title>Green Earth</title>
-  <!-- font integration -->
-   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-green-50">
-  <!-- <div class="bg-[#15803D] flex justify-between items-center px-10 text-white p-[15px]">
-    <div class="text-xl">Green Earth</div>
-    <div class="flex justify-between gap-10 text-sm">
-      <p>About</p>
-      <p>Gallery</p>
-      <p>Plant a Tree</p>
-    </div>
-    <div>
-      <button class="bg-[#FACC15] p-2 rounded-2xl text-green-700 cursor-pointer">Plant a Tree</button>
-    </div>
-  </div> -->
   <div class="navbar bg-[#15803D] shadow-sm">
   <div class="navbar-start">
     <div class="dropdown">
@@ -51,8 +40,7 @@
     <a class="btn btn-ghost bg-[#FACC15] text-green-700 rounded-2xl">Plant a Tree</a>
   </div>
 </div>
-<!-- Section-2 Banner-->
-  <div class="bg-[#CFF0DC] flex flex-col md:flex-row justify-between items-center w-full ">
+<div class="bg-[#CFF0DC] flex flex-col md:flex-row justify-between items-center w-full ">
     <div class="slide-in-left"><img src="assets/hero-leaf1.png" alt=""></div>
     <div class=" flex flex-col items-center">
       <p class="text-4xl font-bold mb-3">Plant a Tree, Grow a Future</p>
@@ -62,14 +50,21 @@
 </div>
   <div><img class="slide-in-right" src="assets/hero-leaf2.png" alt=""></div>
 </div>
-<!-- Section-3 Main Body-->
 <p class="text-center py-10 text-3xl">Choose Your Trees</p>
 <div class="flex flex-col xl:flex-row justify-between gap-20 mb-15 px-2">
-  <div >
-    <div class="mb-5 px-6">Categories</div>
-    <div id="all-plants-container" class="categories flex flex-col flex-wrap gap-4 px-0 w-[280px]">
-      <!-- All the Plant Category -->
+  <div class="categories-section">
+    <div class="mb-5 px-6 hidden lg:block">Categories</div>
+    <div class="dropdown-container lg:hidden">
+      <button class="btn bg-green-50" popovertarget="popover-1" style="anchor-name:--anchor-1">
+        Categories
+      </button>
+      <ul class="dropdown menu w-80 rounded-box bg-base-100 shadow-sm" popover id="popover-1" style="position-anchor:--anchor-1">
+        <div id="all-plants-container-mobile" class="categories flex flex-col flex-wrap gap-4 px-0 w-[280px]">
+        </div>
+      </ul>
     </div>
+    <div id="all-plants-container-desktop" class="categories flex flex-col flex-wrap gap-4 px-0 w-[280px] hidden lg:block">
+      </div>
   </div>
   <div>
     <div id="plant-cards" class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-5 text-sm mx-auto rounded-2xl">
@@ -80,12 +75,6 @@
     <div id = "cart-log">
 
     </div>
-    <!-- <div  class=" mx-5 px-5 py-5 rounded-xl flex justify-between items-center bg-green-50">
-      <div>
-        <p class="font-bold mb-2">Mango Cart</p><span>500*2</span></div>
-      <div>X</div>
-    </div> -->
-
     <hr class="border-t-2 border-gray-100 my-2 mx-5">
     <div class="flex justify-between px-5 total-section">
       <p>Total:</p>
@@ -93,8 +82,7 @@
     </div>
   </div>
   </div>
-<!-- Section-4 -->
-  <p class="text-3xl font-bold text-center py-10">About the Campaign</p>
+<p class="text-3xl font-bold text-center py-10">About the Campaign</p>
   <div class="flex flex-col md:flex-row justify-center items-center mb-25 gap-25">
     <div><img src="assets/about.png" class="w-full max-w-[520px] h-auto px-5"></div>
     <div class="text-lg">
@@ -106,7 +94,6 @@
       </ul>
     </div>
   </div>
-  <!-- Section-5 Review-->
   <div class="bg-[#CFF0DC] py-20">
     <p class="text-3xl text-center font-bold  py-10">Our Impact</p>
     <div class="flex flex-col md:flex-row justify-center gap-5 md:gap-20 px-2">
@@ -124,7 +111,6 @@
     </button>
     </div>
   </div>
-  <!-- Section-6 Form-->
   <div class="bg-[#166534]">
     <p class="text-white text-center py-15 text-3xl">Plant a Tree Today</p>
     <div class="bg-green-500/30 w-full max-w-lg rounded-2xl px-5 py-15 mt-2 flex mx-auto ">
@@ -156,27 +142,20 @@
     </div>
     <div class="py-10"></div>
   </div>
-  <!-- Section-7 Footer-->
   <div class="bg-[#14532D] mx-auto py-5 text-white text-center">© 2025 Green Earth. All Rights Reserved.</div>
-<!-- Open the modal using ID.showModal() method -->
-<!-- //<button class="btn" onclick="my_modal_1.showModal()">open modal</button> -->
 <dialog id="popUpText" class="modal">
   <div class="modal-box">
     <div id="popup-card" class></div>
     <div class="modal-action">
       <form method="dialog">
-        <!-- if there is a button in form, it will close the modal -->
         <button class="btn">Close</button>
       </form>
     </div>
   </div>
 </dialog>
-  <!-- Loading Overlay -->
-<div id="loading" class="fixed inset-0 bg-black/50 flex justify-center items-center z-50 hidden">
+  <div id="loading" class="fixed inset-0 bg-black/50 flex justify-center items-center z-50 hidden">
   <span class="loading loading-dots loading-xl text-green-500"></span>
 </div>
   <script src="script.js"></script>
 </body>
 </html>
-
-
