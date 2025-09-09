@@ -7,6 +7,10 @@
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <link rel="stylesheet" href="style.css">
   <title>Green Earth</title>
+  <!-- font integration -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="bg-green-50">
   <!-- <div class="bg-[#15803D] flex justify-between items-center px-10 text-white p-[15px]">
@@ -85,7 +89,7 @@
     <hr class="border-t-2 border-gray-100 my-2 mx-5">
     <div class="flex justify-between px-5 total-section">
       <p>Total:</p>
-      <p>$<span id="total-amount">0</span></p>
+      <p>৳ <span id="total-amount">0</span></p>
     </div>
   </div>
   </div>
@@ -154,7 +158,20 @@
   </div>
   <!-- Section-7 Footer-->
   <div class="bg-[#14532D] mx-auto py-5 text-white text-center">© 2025 Green Earth. All Rights Reserved.</div>
-<!-- Loading Overlay -->
+<!-- Open the modal using ID.showModal() method -->
+<!-- //<button class="btn" onclick="my_modal_1.showModal()">open modal</button> -->
+<dialog id="popUpText" class="modal">
+  <div class="modal-box">
+    <div id="popup-card" class></div>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+  <!-- Loading Overlay -->
 <div id="loading" class="fixed inset-0 bg-black/50 flex justify-center items-center z-50 hidden">
   <span class="loading loading-dots loading-xl text-green-500"></span>
 </div>

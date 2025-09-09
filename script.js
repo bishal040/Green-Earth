@@ -70,26 +70,81 @@ const url1 = "https://openapi.programming-hero.com/api/plants"
     }
     
     //LoadCards Function
-    const loadCards =(plants) => {
-      const allCards = document.getElementById("plant-cards");
-      allCards.innerHTML = "";
-      for(let plant of plants){
-        const cardBtn = document.createElement("div");
-        cardBtn.innerHTML = `
-        <div class="card bg-white p-5 h-[500px] w-full">
+   const loadCards = (plants) => {
+  const allCards = document.getElementById("plant-cards");
+  allCards.innerHTML = "";
+  for (let plant of plants) {
+    const cardBtn = document.createElement("div");
+    cardBtn.classList.add("card", "bg-white", "p-5", "h-[500px]", "w-full");
+    cardBtn.innerHTML = `
       <img src="${plant.image}" alt="" class="h-54 xl:h-48 w-full object-cover rounded-lg">
-      <p class="mt-2 mb-2 font-bold">${plant.name}</p>
+      <p class="mt-2 mb-2 font-bold cursor-pointer">${plant.name}</p>
       <p class="mt-2 mb-2">${plant.description}</p>
-      <div class="flex justify-between items-center ">
+      <div class="flex justify-between items-center">
         <button class="bg-green-50 p-2 rounded-2xl text-green-700 cursor-pointer">${plant.category}</button>
-        <p><b>Tk <span> ${plant.price}</span></b></p>
+        <p><b>৳ <span>${plant.price}</span></b></p>
       </div>
-      <button onClick="addCart(${plant.id})" class="add-to-cart bg-green-700 p-2 rounded-2xl text-white cursor-pointer mt-2 mb-2 mt-auto">Add to Cart</button>
+      <button class="add-to-cart bg-green-700 p-2 rounded-2xl text-white cursor-pointer mt-2 mb-2 mt-auto">Add to Cart</button>
+    `;
+    const nameEl = cardBtn.querySelector("p.font-bold");
+    nameEl.addEventListener("click", () => showPopUp(plant));
+    const cartBtn = cardBtn.querySelector(".add-to-cart");
+    cartBtn.addEventListener("click", () => addCart(plant.id));
+
+    allCards.appendChild(cardBtn);
+  }
+};
+const showPopUp = (plant) => {
+  const popupCard = document.getElementById("popup-card");
+  popupCard.innerHTML = `
+    <div class="p-5">
+      <h2 class="text-2xl font-semibold mb-2">${plant.name}</h2>
+      <img src="${plant.image}" alt="" class="h-54 xl:h-48 w-full object-cover rounded-lg">
+      <p class="text-gray-600"><span class="font-semibold">Category:</span> ${plant.category}</p>
+      <p class="text-gray-600"><span class="font-semibold">Price:</span> ৳ ${plant.price}</p>
+      <p class="mt-3 text-gray-700 text-sm leading-relaxed">
+        <span class="font-semibold">Description:</span> ${plant.description}
+      </p>
     </div>
-        `;
-        allCards.appendChild(cardBtn);
-      }
+  `;
+  document.getElementById("popUpText").showModal();
+};
+    //Add Pop Up method
+    const loadPopUp = (id) => {
+      let url =`https://openapi.programming-hero.com/api/category/${id}`;
+      
+      fetch(url)
+      .then((res)=>res.json())
+      .then((json) => {
+        const arr= json.plants;
+        addPopUp(arr,id);
+      });
     }
+    const addPopUp = (plants,id)=>{
+      for(let plant of plants){
+        if(plant.id==id){
+
+          const allCards = document.getElementById("popup-card");
+          allCards.innerHTML = `
+          <div class="p-5">
+      <h2 class="text-2xl font-semibold mb-2">${plant.name}</h2>
+      <img src="${plant.image}" alt="" class="h-54 xl:h-48 w-full object-cover rounded-lg">
+      <p class="text-gray-600"><span class="font-semibold">Category:</span>${plant.category}</p>
+      <p class="text-gray-600"><span class="font-semibold">Price:</span> ৳ ${plant.price}</p>
+      
+      <p class="mt-3 text-gray-700 text-sm leading-relaxed">
+        <span class="font-semibold">Description:</span>${plant.description}
+      </p>
+
+      <!-- Close Button -->
+      
+    </div>
+  </div>
+          `;
+          //allCards.appendChild(cardBtn);
+          document.getElementById("popUpText").showModal();
+        }
+    }}
     //Add Cart Function
     const addCart = (id) => {
       const cart = document.getElementById("cart-log");
