@@ -13,7 +13,7 @@ const url1 = "https://openapi.programming-hero.com/api/plants"
         if(count==0){
           const plantBtn = document.createElement("div");
           plantBtn.innerHTML = `
-          <button class="category-btn block w-full px-6 py-2 rounded-xl text-left cursor-pointer toggle-btn text-zinc-700" segment-id="${count++}" data-category="All Trees">All Trees</button>
+          <button class="category-btn block w-full px-6 py-2 rounded-xl text-left cursor-pointer toggle-btn text-zinc-700 hover:scale-110 hover:bg-[#15803D] hover:text-white" segment-id="${count++}" data-category="All Trees">All Trees</button>
           `;
           allPlantsContainer.appendChild(plantBtn);
           const btn = plantBtn.querySelector("button");
@@ -27,7 +27,7 @@ const url1 = "https://openapi.programming-hero.com/api/plants"
           if (!document.querySelector(`button[data-category="${plant.category}"]`)) {
           const plantBtn = document.createElement("div");
           plantBtn.innerHTML = `
-          <button class="category-btn block w-full px-6 py-2 rounded-xl text-left cursor-pointer toggle-btn text-zinc-700 " segment-id="${count++}" data-category="${plant.category}">${plant.category}</button>
+          <button class="category-btn block w-full px-6 py-2 rounded-xl text-left cursor-pointer toggle-btn text-zinc-700 hover:scale-110 hover:bg-[#15803D] hover:text-white " segment-id="${count++}" data-category="${plant.category}">${plant.category}</button>
           `;
           allPlantsContainer.appendChild(plantBtn);
           const btn = plantBtn.querySelector("button");
