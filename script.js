@@ -1,42 +1,74 @@
 const url1 = "https://openapi.programming-hero.com/api/plants"
-const url2 = "https://openapi.programming-hero.com/api/categories"
-//const url3A = "https://openapi.programming-hero.com/api/category/${id}"
-const url3B = "https://openapi.programming-hero.com/api/category/1"
-const url4A = "https://openapi.programming-hero.com/api/plant/${id}"
-const url4B = "https://openapi.programming-hero.com/api/plant/1"
+    const showLoading = () => document.getElementById("loading").classList.remove("hidden");
+    const hideLoading = () => document.getElementById("loading").classList.add("hidden");
     const allPlants = () => {
+      showLoading();
       fetch(url1)
       .then((res)=>res.json())
       .then((json) => {
         const allPlantsContainer = document.getElementById("all-plants-container");
         const arr= json.plants;
         allPlantsContainer.innerHTML = "";
-        let count = 1;
+        let count = 0;
+        if(count==0){
+          const plantBtn = document.createElement("div");
+          plantBtn.innerHTML = `
+          <button class="category-btn block w-full px-6 py-2 rounded-xl text-left cursor-pointer toggle-btn text-zinc-700" segment-id="${count++}" data-category="All Trees">All Trees</button>
+          `;
+          allPlantsContainer.appendChild(plantBtn);
+          const btn = plantBtn.querySelector("button");
+          const segmentId = btn.getAttribute("segment-id");
+          const id = parseInt(segmentId);
+          btn.addEventListener("click", () => {
+          loadData(id, btn);
+        });
+        }
         for(let plant of arr){
           if (!document.querySelector(`button[data-category="${plant.category}"]`)) {
           const plantBtn = document.createElement("div");
           plantBtn.innerHTML = `
-          <button onClick="loadData(${count++})" class="category-btn block w-full px-6 py-2 text-zinc-700 rounded-xl text-left cursor-pointer" data-category="${plant.category}">${plant.category}</button>
+          <button class="category-btn block w-full px-6 py-2 rounded-xl text-left cursor-pointer toggle-btn text-zinc-700 " segment-id="${count++}" data-category="${plant.category}">${plant.category}</button>
           `;
           allPlantsContainer.appendChild(plantBtn);
+          const btn = plantBtn.querySelector("button");
+          const segmentId = btn.getAttribute("segment-id");
+          const id = parseInt(segmentId);
+          btn.addEventListener("click", () => {
+          loadData(id, btn);
+        });
         }
       }
       loadCards(arr);
         }
       )   
+    .finally(() => hideLoading());
     };
   allPlants();
-    const loadData = (id) => {
-      const url =`https://openapi.programming-hero.com/api/category/${id}`;
+    const loadData = (id, btn) => {
+      document.querySelectorAll(".category-btn").forEach(b => {
+    b.classList.remove("bg-[#15803D]", "text-white");
+    b.classList.add("bg-green-50", "text-zinc-700");
+  });
+
+  if (btn) {
+    btn.classList.remove("bg-green-50", "text-zinc-700");
+    btn.classList.add("bg-[#15803D]", "text-white");  
+  }   
+      let url =`https://openapi.programming-hero.com/api/category/${id}`;
+      if(id==0){
+        url =url1;
+      }
       const allCards = document.getElementById("plant-cards");
       allCards.innerHTML = "";
+      showLoading();
       fetch(url)
       .then((res)=>res.json())
       .then((json) => {
         const arr= json.plants;
         loadCards(arr);
-      });
+      }).finally(() => hideLoading());
     }
+    
     //LoadCards Function
     const loadCards =(plants) => {
       const allCards = document.getElementById("plant-cards");
@@ -44,7 +76,7 @@ const url4B = "https://openapi.programming-hero.com/api/plant/1"
       for(let plant of plants){
         const cardBtn = document.createElement("div");
         cardBtn.innerHTML = `
-        <div class="card bg-white p-5 h-[500px] w-full  ">
+        <div class="card bg-white p-5 h-[500px] w-full">
       <img src="${plant.image}" alt="" class="h-54 xl:h-48 w-full object-cover rounded-lg">
       <p class="mt-2 mb-2 font-bold">${plant.name}</p>
       <p class="mt-2 mb-2">${plant.description}</p>
@@ -92,6 +124,7 @@ const url4B = "https://openapi.programming-hero.com/api/plant/1"
               let current = parseInt(total.innerText) || 0;
               total.innerText = current + parseInt(plant.price);
             }
+            alert(plant.name + " has been added to the cart.");
           }
         }
       });
@@ -106,3 +139,4 @@ const url4B = "https://openapi.programming-hero.com/api/plant/1"
       total.innerText = current -(parseInt(cartPrice.innerText)*parseInt(cartQnt.innerText));
       cart.remove();
     }
+    

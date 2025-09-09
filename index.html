@@ -60,16 +60,15 @@
 </div>
 <!-- Section-3 Main Body-->
 <p class="text-center py-10 text-3xl">Choose Your Trees</p>
-<div class="flex flex-col lg:flex-row justify-between gap-20 mb-15 px-2">
-  <div>
+<div class="flex flex-col xl:flex-row justify-between gap-20 mb-15 px-2">
+  <div >
     <div class="mb-5 px-6">Categories</div>
-    <button onClick ="allPlants()"class="category-btn block w-full px-6 py-2 text-zinc-700 rounded-xl text-left mb-3 cursor-pointer" data-category="${plant.category}">All Trees</button>
-    <div id="all-plants-container" class="categories flex flex-col gap-4 px-0 w-[280px]">
+    <div id="all-plants-container" class="categories flex flex-col flex-wrap gap-4 px-0 w-[280px]">
       <!-- All the Plant Category -->
     </div>
   </div>
   <div>
-    <div id="plant-cards" class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-5 text-sm mx-auto rounded-2xl">
+    <div id="plant-cards" class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-5 text-sm mx-auto rounded-2xl">
   </div>
   </div>
   <div class="cart  bg-white h-auto w-full">
@@ -107,18 +106,18 @@
   <div class="bg-[#CFF0DC] py-20">
     <p class="text-3xl text-center font-bold  py-10">Our Impact</p>
     <div class="flex flex-col md:flex-row justify-center gap-5 md:gap-20 px-2">
-    <div class="bg-white rounded-2xl w-full text-center py-10 ">
+    <button class="bg-white rounded-2xl w-full text-center py-10 hover:scale-110 hover:bg-green-50 transition-transform duration-300 ease-in-out">
       <p class="text-3xl text-green-700 font-semibold mb-2">500K+</p>
       <p class="text-zinc-500">Trees Planted</p>
-    </div>
-    <div class="bg-white rounded-2xl w-full text-center py-10">
+    </button>
+    <button class="bg-white rounded-2xl w-full text-center py-10 hover:scale-110 hover:bg-green-50 transition-transform duration-300 ease-in-out">
       <p class="text-3xl text-green-700 font-semibold mb-2">120+</p>
       <p class="text-zinc-500">Communities Involved</p>
-    </div>
-    <div class="bg-white rounded-2xl w-full text-center py-10">
+    </button>
+    <button class="bg-white rounded-2xl w-full text-center py-10 hover:scale-110 hover:bg-green-50 transition-transform duration-300 ease-in-out">
       <p class="text-3xl text-green-700 font-semibold mb-2">30+</p>
       <p class="text-zinc-500">Countries Reached</p>
-    </div>
+    </button>
     </div>
   </div>
   <!-- Section-6 Form-->
@@ -155,6 +154,11 @@
   </div>
   <!-- Section-7 Footer-->
   <div class="bg-[#14532D] mx-auto py-5 text-white text-center">© 2025 Green Earth. All Rights Reserved.</div>
+  <!-- Loading Overlay -->
+<!-- Loading Overlay -->
+<div id="loading" class="fixed inset-0 bg-black/50 flex justify-center items-center z-50 hidden">
+  <span class="loading loading-dots loading-xl text-green-500"></span>
+</div>
   <script src="script.js"></script>
 </body>
 </html>
